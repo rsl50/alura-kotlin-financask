@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.financask.R
+import br.com.alura.financask.ui.adapter.ListaTransacoesAdapter
 import kotlinx.android.synthetic.main.activity_lista_transacoes.*
 
 class ListaTransacoesActivity : AppCompatActivity() {
@@ -12,7 +13,6 @@ class ListaTransacoesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_transacoes)
 
-        // val indica variável apenas para leitura
         val transacoes = listOf("Comida - R$ 20,50", "Economia - R$ 100,00")
 
         val arrayAdapter = ArrayAdapter(
@@ -20,6 +20,6 @@ class ListaTransacoesActivity : AppCompatActivity() {
             android.R.layout.simple_list_item_1, transacoes
         )
 
-        lista_transacoes_listview.setAdapter(arrayAdapter)
+        lista_transacoes_listview.setAdapter(ListaTransacoesAdapter(transacoes, this))
     }
 }
