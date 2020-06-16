@@ -62,11 +62,11 @@ class ListaTransacoesAdapter(
     }
 
     private fun corPor(tipo: Tipo): Int {
-        if (tipo == Tipo.RECEITA) {
-            return ContextCompat.getColor(context, R.color.receita)
+        //when expression: https://kotlinlang.org/docs/reference/control-flow.html#when-expression
+        return when (tipo) {
+            Tipo.RECEITA -> ContextCompat.getColor(context, R.color.receita)
+            Tipo.DESPESA -> ContextCompat.getColor(context, R.color.despesa)
         }
-
-        return ContextCompat.getColor(context, R.color.despesa)
     }
 
     override fun getItem(posicao: Int): Transacao {
