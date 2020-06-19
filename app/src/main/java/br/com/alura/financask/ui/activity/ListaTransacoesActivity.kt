@@ -31,6 +31,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
         resumoView.adicionaReceita()
         resumoView.adicionaDespesa()
+        resumoView.adicionaTotal()
     }
 
     private fun configuraLista(transacoes: List<Transacao>) {
