@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import br.com.alura.financask.R
+import br.com.alura.financask.delegate.TransacaoDelegate
 import br.com.alura.financask.extension.converteParaCalentdar
 import br.com.alura.financask.extension.formataParaBrasileiro
 import br.com.alura.financask.model.Tipo
@@ -20,18 +21,18 @@ import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
-class adicionaTransacaoDialog(private val viewGroup: ViewGroup,
+class AdicionaTransacaoDialog(private val viewGroup: ViewGroup,
                               private val context: Context) {
 
     private val viewCriada = criaLayout()
 
-    private fun configuraDialog() {
+    fun configuraDialog(transacaoDelegate: TransacaoDelegate) {
         configuraCampoData()
         configuraCampoCategoria()
-        configuraFormulario()
+        configuraFormulario(transacaoDelegate)
     }
 
-    private fun configuraFormulario() {
+    private fun configuraFormulario(transacaoDelegate:  TransacaoDelegate) {
         AlertDialog.Builder(context)
             .setTitle(R.string.adiciona_receita)
             .setView(viewCriada)
@@ -53,8 +54,7 @@ class adicionaTransacaoDialog(private val viewGroup: ViewGroup,
                         categoria = categoriaEmTexto
                     )
 
-                    atualizaTransacoes(transacaoCriada)
-                    lista_transacoes_adiciona_menu.close(true)
+                    transacaoDelegate.delegate(transacaoCriada)
                 })
             .setNegativeButton("Cancelar", null)
             .show()
