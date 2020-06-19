@@ -1,8 +1,11 @@
 package br.com.alura.financask.ui.activity
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.financask.R
 import br.com.alura.financask.model.Tipo
@@ -27,7 +30,18 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
         lista_transacoes_adiciona_receita
             .setOnClickListener {
-                Toast.makeText(this, "clique de receita", Toast.LENGTH_LONG).show()
+
+                val view = window.decorView
+                val viewCriada = LayoutInflater.from(this).inflate(
+                    R.layout.form_transacao,
+                    view as ViewGroup,
+                    false
+                )
+
+                AlertDialog.Builder(this)
+                    .setTitle(R.string.adiciona_receita)
+                    .setView(viewCriada)
+                    .show()
             }
     }
 
