@@ -30,16 +30,16 @@ class AlteraTransacaoDialog(private val viewGroup: ViewGroup,
     fun chama(transacao: Transacao, transacaoDelegate: TransacaoDelegate) {
         val tipo = transacao.tipo
 
+        configuraCampoData()
+        configuraCampoCategoria(tipo)
+        configuraFormulario(tipo, transacaoDelegate)
+
         campoValor.setText(transacao.valor.toString())
         campoData.setText(transacao.data.formataParaBrasileiro())
 
         val categoriasRetornadas = context.resources.getStringArray(categoriasPor(tipo))
         val posicaoCategoria = categoriasRetornadas.indexOf(transacao.categoria)
         campoCategoria.setSelection(posicaoCategoria, true)
-
-        configuraCampoData()
-        configuraCampoCategoria(tipo)
-        configuraFormulario(tipo, transacaoDelegate)
     }
 
     private fun configuraFormulario(tipo: Tipo, transacaoDelegate:  TransacaoDelegate) {
@@ -49,7 +49,7 @@ class AlteraTransacaoDialog(private val viewGroup: ViewGroup,
             .setTitle(titulo)
             .setView(viewCriada)
             .setPositiveButton(
-                "Adicionar",
+                "Alterar",
                 DialogInterface.OnClickListener { _, _ ->
                     val valorEmTexto = campoValor.text.toString()
                     val dataEmTexto = campoData.text.toString()
@@ -73,10 +73,10 @@ class AlteraTransacaoDialog(private val viewGroup: ViewGroup,
 
     private fun tipoPor(tipo: Tipo): Int {
         if (tipo == Tipo.RECEITA) {
-            return R.string.adiciona_receita
+            return R.string.altera_receita
         }
 
-        return R.string.adiciona_despesa
+        return R.string.altera_despesa
     }
 
     private fun converteCampoValor(valorEmTexto: String): BigDecimal {
