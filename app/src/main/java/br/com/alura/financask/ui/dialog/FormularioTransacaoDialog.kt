@@ -28,10 +28,10 @@ abstract class FormularioTransacaoDialog(
     protected val campoData = viewCriada.form_transacao_data
     abstract val tituloBotaoPositivo: String
 
-    fun chama(tipo: Tipo, delegate: (transacao: Transacao) -> Unit) {
+    fun chama(tipo: Tipo, transacaoDelegate: (transacao: Transacao) -> Unit) {
         configuraCampoData()
         configuraCampoCategoria(tipo)
-        configuraFormulario(tipo, delegate)
+        configuraFormulario(tipo, transacaoDelegate)
     }
 
     private fun configuraFormulario(tipo: Tipo, delegate: (transacao: Transacao) -> Unit) {

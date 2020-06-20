@@ -20,9 +20,9 @@ class AlteraTransacaoDialog(viewGroup: ViewGroup,
         return R.string.altera_despesa
     }
 
-    fun chama(transacao: Transacao, delegate: (transacao: Transacao) -> Unit) {
+    fun chama(transacao: Transacao, ttransadaoDelegate: (transacao: Transacao) -> Unit) {
         val tipo = transacao.tipo
-        super.chama(tipo, delegate)
+        super.chama(tipo, ttransadaoDelegate)
         inicializaCampos(transacao)
     }
 

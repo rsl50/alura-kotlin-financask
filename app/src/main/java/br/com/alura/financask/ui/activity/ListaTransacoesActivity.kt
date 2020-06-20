@@ -47,10 +47,10 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
     private fun chamaDialogDeAdicao(tipo: Tipo) {
         AdicionaTransacaoDialog(viewGroupDaActivity, this)
-            .chama(tipo) { transacaoCriada ->
-                adiciona(transacaoCriada)
+            .chama(tipo, transacaoDelegate = {transacaoCraida ->
+                adiciona(transacaoCraida)
                 lista_transacoes_adiciona_menu.close(true)
-            }
+            })
     }
 
     private fun adiciona(transacao: Transacao) {
