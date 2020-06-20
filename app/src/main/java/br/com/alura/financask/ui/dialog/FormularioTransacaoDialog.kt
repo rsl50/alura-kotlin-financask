@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.form_transacao.view.*
 import java.math.BigDecimal
 import java.util.*
 
-open class FormularioTransacaoDialog(
+abstract class FormularioTransacaoDialog(
     private val context: Context,
     private val viewGroup: ViewGroup)
 {
@@ -27,6 +27,8 @@ open class FormularioTransacaoDialog(
     protected val campoValor = viewCriada.form_transacao_valor
     protected val campoCategoria = viewCriada.form_transacao_categoria
     protected val campoData = viewCriada.form_transacao_data
+    abstract val tituloBotaoPositivo: String
+
     fun chama(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
         configuraCampoData()
         configuraCampoCategoria(tipo)
@@ -34,13 +36,13 @@ open class FormularioTransacaoDialog(
     }
 
     private fun configuraFormulario(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
-        val titulo = tipoPor(tipo)
+        val titulo = tituloPor(tipo)
 
         AlertDialog.Builder(context)
             .setTitle(titulo)
             .setView(viewCriada)
             .setPositiveButton(
-                "Adicionar",
+                tituloBotaoPositivo,
                 DialogInterface.OnClickListener { _, _ ->
                     val valorEmTexto = campoValor.text.toString()
                     val dataEmTexto = campoData.text.toString()
@@ -62,13 +64,7 @@ open class FormularioTransacaoDialog(
             .show()
     }
 
-    private fun tipoPor(tipo: Tipo): Int {
-        if (tipo == Tipo.RECEITA) {
-            return R.string.adiciona_receita
-        }
-
-        return R.string.adiciona_despesa
-    }
+    abstract protected fun tituloPor(tipo: Tipo): Int
 
     private fun converteCampoValor(valorEmTexto: String): BigDecimal {
         return try {
