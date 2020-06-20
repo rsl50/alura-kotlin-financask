@@ -24,7 +24,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_transacoes)
 
-        //viewDaActivity = window.decorView
+        viewDaActivity = window.decorView
 
         configuraResumo()
         configuraLista()
